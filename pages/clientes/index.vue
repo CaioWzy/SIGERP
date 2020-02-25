@@ -1,38 +1,58 @@
 <template>
-  <div class="col">
-    <b-table striped hover :items="items" :fields="fields"></b-table>
-  </div>
+  <ListPage>
+    <template v-slot:title>
+      <h2>Cliente</h2>
+    </template>
+    <template v-slot:controls>
+      <ClienteFormModal />
+    </template>
+    <template v-slot:table>
+      <b-table striped hover :items="fetchData" :fields="fields" />
+    </template>
+  </ListPage>
 </template>
 
 <script>
+import ListPage from "~/components/ListPage";
+import ClienteFormModal from "~/components/Cliente/ClienteFormModal";
 export default {
-  layout: "list",
+  layout: "list/index",
+  components: {
+    ListPage,
+    ClienteFormModal
+  },
   data() {
-        return {
-          fields: [
-            {
-              key: 'fantasy_name',
-              sortable: 'true',
-              label: 'Nome Fantasia'
-            },
-            {
-              key: 'company_name',
-              sortable: 'true',
-              label: 'Razão Social'
-            },
-            {
-              key: 'cnpj',
-              label: 'CNPJ'
-            },
-          ],
-          items: [
-            { id: 1, fantasy_name: 'Ristoranti in Brasile', company_name: 'COMIDAS BRASILEIRAS LTDA', cnpj: '35.535.360/0001-72' },
-            { id: 2, fantasy_name: 'Ristoranti in Brasile', company_name: 'COMIDAS BRASILEIRAS LTDA', cnpj: '35.535.360/0001-72' },
-            { id: 3, fantasy_name: 'Ristoranti in Brasile', company_name: 'COMIDAS BRASILEIRAS LTDA', cnpj: '35.535.360/0001-72' },
-            { id: 4, fantasy_name: 'Ristoranti in Brasile', company_name: 'COMIDAS BRASILEIRAS LTDA', cnpj: '35.535.360/0001-72' },
-          ]
+    return {
+      fields: [
+        {
+          key: "fantasy_name",
+          sortable: "true",
+          label: "Nome Fantasia"
+        },
+        {
+          key: "company_name",
+          sortable: "true",
+          label: "Razão Social"
+        },
+        {
+          key: "cnpj",
+          label: "CNPJ"
         }
-      }
+      ]
+    };
+  },
+  methods: {
+    fetchData(ctx, callback) {
+      this.$axios
+        .$get("http://www.mocky.io/v2/5e544f143100006d00eb3154")
+        .then(data => {
+          callback(data);
+        })
+        .catch(error => {
+          return [];
+        });
+    }
+  }
 };
 </script>
 

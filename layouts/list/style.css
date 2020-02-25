@@ -1,0 +1,89 @@
+html {
+    font-family: "Roboto";
+  }
+  
+  .information {
+    color: rgba(0, 0, 0, 0.75);
+  }
+  
+  .information__separator {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .information__matricula {
+    color: rgba(0, 0, 0, 0.25);
+  }
+  
+  .information .fas {
+    width: 1.5rem;
+    padding-right: 16px;
+  }
+  
+  .information ul {
+    padding: 0;
+  }
+  
+  .card {
+    font-size: 0.75rem;
+  }
+  
+  .card-header {
+    padding: 0.65rem 0;
+  }
+  
+  .card-body {
+    padding: 0.65rem 0;
+  }
+  
+  .breadcrumb {
+    background: transparent;
+    padding: 0;
+  }
+  
+
+ 
+  th:not([scope="row"]) {
+    color: rgba(0, 0, 0, 0.25);
+  }
+  
+  .table,
+  th,
+  td,
+  tr {
+    border: 0 !important;
+    border-radius: 0.25rem;
+  }
+  
+  /* Página de Listagem */
+  
+  .page-header {
+    background: #2980b9;
+    color: #fff;
+  }
+  
+
+  
+  /* Bootstrap buttons */
+  
+  .btn-custom {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50% !important;
+    background: rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    border: none;
+    opacity: 0.85;
+  }
+  
+  .btn-custom:hover {
+      background: #FFF !important;
+  }
+  
+  .btn-add:hover {
+      color: #27ae60;
+  }
+  
+  .btn-back:hover {
+      color: #2c3e50;
+  }
+  
