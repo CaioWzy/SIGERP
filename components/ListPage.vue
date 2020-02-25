@@ -16,7 +16,9 @@
     </div>
     <div class="container mt-4">
       <div class="row">
-        <slot name="table"></slot>
+        <div class="col">
+          <slot name="table"></slot>
+        </div>
       </div>
     </div>
   </div>
