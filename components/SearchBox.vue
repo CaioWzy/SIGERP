@@ -3,7 +3,7 @@
     <input
       type="text"
       class="form-control form-control--custom"
-      :class="{'searchbox--active': hasChars }"
+      :class="{'form-control--active': hasChars }"
       v-model="SearchInput"
       @change="checkHasChars"
       placeholder="Pesquisar"
@@ -26,7 +26,7 @@
   color: #fff;
 }
 
-.searchbox--active {
+.form-control--active {
   background: #fff !important;
 }
 </style>
