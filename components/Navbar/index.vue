@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import UserMenuButton from "~/components/UserMenuButton";
-import SearchBox from "~/components/SearchBox";
+import UserMenuButton from './UserMenuButton';
+import SearchBox from './SearchBox';
 
 export default {
   components: {
