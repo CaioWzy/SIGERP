@@ -1,53 +1,43 @@
 <template>
-  <ListPage>
-    <template v-slot:title>
-      <h2>Funcionários</h2>
-    </template>
-    <template v-slot:controls>
-      <ClienteFormModal />
-    </template>
-    <template v-slot:table>
-      <b-table striped hover :items="fetchData" :fields="fields" />
-    </template>
-  </ListPage>
+  <div>
+    <Header>
+      <template v-slot:title>
+        <h2>Funcionários</h2>
+      </template>
+    </Header>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col">
+          <List />
+        </div>
+      </div>
+    </div>
+    <ModalForm />
+  </div>
 </template>
 
 <script>
-import ListPage from "~/components/ListPage";
-import ClienteFormModal from "~/components/Cliente/ClienteFormModal";
+import { mapMutations } from "vuex";
+
+
+import Header from "~/components/Header";
+import List from "~/components/Funcionario/List";
+import ModalForm from "~/components/Funcionario/ModalForm";
+
 export default {
-  layout: "list/index",
+  layout: "list",
   components: {
-    ListPage,
-    ClienteFormModal
+    Header,
+    List,
+    ModalForm
   },
-  data() {
-    return {
-      fields: [
-        {
-          key: "name",
-          sortable: "true",
-          label: "Nome"
-        },
-        {
-          key: "enrolment",
-          sortable: "true",
-          label: "Matrícula"
-        }
-      ]
-    };
+  created() {
+    this.setEditMode(false);
   },
   methods: {
-    fetchData(ctx, callback) {
-      this.$axios
-        .$get("http://www.mocky.io/v2/5e5580d531000033b7eb38fb")
-        .then(data => {
-          callback(data);
-        })
-        .catch(error => {
-          return [];
-        });
-    }
+    ...mapMutations({
+      setEditMode: "pages/setEditMode",
+    })
   }
 };
 </script>
