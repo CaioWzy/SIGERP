@@ -1,5 +1,5 @@
 <template>
-  <b-table striped hover :items="fetchData" :fields="fields"  @row-clicked="showItem" />
+  <b-table id="clientesListTable" striped hover :items="fetchData" :fields="fields"  @row-clicked="showItem" />
 </template>
 
 <script>
@@ -30,9 +30,9 @@ export default {
     },
     fetchData(ctx, callback) {
       this.$axios
-        .$get("http://www.mocky.io/v2/5e544f143100006d00eb3154")
+        .$get("http://127.0.0.1:8000/api/clientes/")
         .then(data => {
-          callback(data);
+          callback(data.clientes);
         })
         .catch(error => {
           return [];

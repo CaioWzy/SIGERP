@@ -1,5 +1,5 @@
 <template>
-  <ModalButton editMode entity="Cliente" modalFormId="modalFormDefault">
+  <ModalButton :editMode="this.$store.state.pages.editMode" entity="Cliente" modalFormId="modalFormDefault">
     <template v-slot:form>
       <Form />
     </template>
