@@ -4,9 +4,6 @@
       <template v-slot:title>
         <h2>{{ company_name }}</h2>
       </template>
-      <template v-slot:controls>
-        <ModalForm editMode />
-      </template>
     </Header>
     <div class="container mt-4">
       <div class="row">
@@ -28,11 +25,14 @@
         </div>
       </div>
     </div>
+    <p> {{ id }} </p>
+    <ModalForm editMode />
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
+
 import Header from "~/components/Header";
 import ModalForm from "~/components/Cliente/ModalForm";
 
@@ -42,13 +42,14 @@ export default {
     Header,
     ModalForm
   },
-  mounted() {
-    console.log(this.$route.params.id);
-  },
   created() {
+    this.setEditMode(true)
     this.fetchData();
   },
   computed: {
+    id() {
+      return this.$store.state.clientes.id;
+    },
     fantasy_name() {
       return this.$store.state.clientes.fantasy_name;
     },
@@ -62,16 +63,17 @@ export default {
   methods: {
     fetchData() {
       this.$axios
-        .$get("http://127.0.0.1:8000/api/clientes/2")
+        .$get(`http://127.0.0.1:8000/api/clientes/${this.$route.params.id}`)
         .then(data => {
           this.setCliente(data);
         })
         .catch(error => {
-          //return {};
+          this.$router.push("/404")
         });
     },
     ...mapMutations({
-      setCliente: "clientes/setCliente"
+      setCliente: "clientes/setCliente",
+      setEditMode: "pages/setEditMode",
     })
   }
 };

@@ -1,14 +1,19 @@
 export const state = () => ({
-  company_name: "",
-  fantasy_name: "",
-  cnpj: ""
+  id: null,
+  company_name: null,
+  fantasy_name: null,
+  cnpj: null
 })
 
 export const mutations = {
   setCliente(state, { cliente }) {
+    state.id = cliente.id
     state.company_name = cliente.company_name
     state.fantasy_name = cliente.fantasy_name
     state.cnpj = cliente.cnpj
+  },
+  setId(state, value) {
+    state.id = value  
   },
   setCompanyName(state, value) {
     state.company_name = value  
@@ -18,21 +23,11 @@ export const mutations = {
   },
   setCnpj(state, value) {
     state.cnpj = value
-  }
-  /*
-  add(state, text) {
-    state.list.push({
-      text,
-      done: false
-    })
   },
-  remove(state, {
-    todo
-  }) {
-    state.list.splice(state.list.indexOf(todo), 1)
-  },
-  toggle(state, todo) {
-    todo.done = !todo.done
+  resetCliente(state) {
+    state.id = null,
+    state.company_name = null,
+    state.fantasy_name = null,
+    state.cnpj = null
   }
-  */
 }

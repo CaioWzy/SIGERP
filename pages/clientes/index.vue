@@ -17,16 +17,30 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 import Header from "~/components/Header";
 import ModalForm from "~/components/Cliente/ModalForm";
-import List from "~/components/Cliente/List"
+import List from "~/components/Cliente/List";
+
 export default {
   layout: "list",
   components: {
     Header,
     ModalForm,
     List
+  },
+  created() {
+    this.setEditMode(false);
+    this.resetCliente()
+
+  },
+  methods: {
+    ...mapMutations({
+      setEditMode: "pages/setEditMode",
+      resetCliente: "clientes/resetCliente"
+    })
   }
-}
+};
 </script>
 
