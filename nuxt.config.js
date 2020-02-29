@@ -42,6 +42,7 @@ export default {
    */
   plugins: [
     '~/plugins/fontawesome.js',
+    '~/plugins/eventBus.js'
   ],
   /*
    ** Nuxt.js dev-modules
