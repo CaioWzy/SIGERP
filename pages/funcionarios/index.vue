@@ -1,42 +1,57 @@
 <template>
   <div>
-    <Header>
-      <template v-slot:title>
-        <h2>Funcionários</h2>
-      </template>
-    </Header>
     <div class="container mt-4">
       <div class="row">
         <div class="col">
-          <List />
+          <InfiniteTable :endpoint="endpoint" :fields="fields" />
         </div>
       </div>
     </div>
-    <ModalForm />
+    <DefaultModalForm />
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
 
-
-import Header from "~/components/Header";
-import List from "~/components/Funcionario/List";
-import ModalForm from "~/components/Funcionario/ModalForm";
+import InfiniteTable from "~/components/InfiniteTable";
+import DefaultModalForm from "~/components/Funcionario/DefaultModalForm";
 
 export default {
-  layout: "list",
   components: {
-    Header,
-    List,
-    ModalForm
+    InfiniteTable,
+    DefaultModalForm
   },
   created() {
-    this.setEditMode(false);
+    this.reset();
+    this.setTitle("Funcionários");
+    this.setEndpoint("/funcionarios/");
+  },
+  data() {
+    return {
+      fields: [
+        {
+          key: "name",
+          sortable: "true",
+          label: "Nome"
+        },
+        {
+          key: "enrolment",
+          label: "Matrícula"
+        }
+      ]
+    };
+  },
+  computed: {
+    endpoint() {
+      return this.$store.state.pages.endpoint;
+    }
   },
   methods: {
     ...mapMutations({
-      setEditMode: "pages/setEditMode",
+      setEndpoint: "pages/setEndpoint",
+      setTitle: "pages/setTitle",
+      reset: "pages/reset"
     })
   }
 };
