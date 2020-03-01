@@ -1,10 +1,5 @@
 <template>
   <div>
-    <Header>
-      <template v-slot:title>
-        <h2>{{ cliente.fantasy_name }}</h2>
-      </template>
-    </Header>
     <div class="container mt-4">
       <div class="row">
         <div class="col">
@@ -40,11 +35,11 @@ export default {
   },
   created() {
     this.setEditMode(true);
-    this.setEndpoint('/clientes/');
+    this.setEndpoint("/clientes/");
     this.get(this.$route.params.id);
   },
   beforeUpdate() {
-    this.setTitle(this.cliente.fantasy_name)
+    this.setTitle(this.cliente.fantasy_name);
   },
   computed: {
     cliente() {

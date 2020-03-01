@@ -1,107 +1,122 @@
 <template>
   <div>
-    <Header editMode>
-      <template v-slot:title>
-        <h2>{{ funcionario.name }}</h2>
-      </template>
-      <template v-slot:controls>
-        <b-button @click="$bvModal.show('modalHistorico')" class="btn btn-custom btn-add">
-          <font-awesome-icon :icon="['fas', 'history']" />
-        </b-button>
-        <b-button @click="$bvModal.show('modalHistorico')" class="btn btn-custom btn-add">
-          <font-awesome-icon :icon="['fas', 'trash']" />
-        </b-button>
-      </template>
-    </Header>
     <div class="container mt-4">
       <div class="row">
         <div class="col">
           <div class="information-card">
             <ul class="information">
-              <li>
+              <li v-if="hasClienteData">
                 <font-awesome-icon :icon="['fas', 'briefcase']" />
                 <span>
-                  <b>{{ funcionario.cliente.fantasy_name }}</b>
-                  desde {{ funcionario.admission_date }}
+                  Trabalha na empresa
+                  <b>{{ funcionario.client.fantasy_name }}</b>
+                  desde
+                  <b>{{ humanizeDate(funcionario.admission_date) }}</b>
                 </span>
               </li>
+
               <li>
                 <font-awesome-icon :icon="['fas', 'user']" />
                 <span>
+                  Matrícula
                   <b>{{ funcionario.enrolment }}</b>
                 </span>
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'envelope']" />
-                <span>{{ funcionario.email }}</span>
+                <span>
+                  E-mail
+                  <b>{{ funcionario.email }}</b>
+                </span>
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'id-card']" />
-                <span>{{ funcionario.cpf }}</span>
+                <span>
+                  CPF
+                  <b>{{ funcionario.cpf }}</b>
+                </span>
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'birthday-cake']" />
-                <span>{{ funcionario.date_of_birth }}</span>
+                <span>
+                  Nasceu em
+                  <b>{{ humanizeDate(funcionario.date_of_birth) }}</b>
+                </span>
               </li>
             </ul>
           </div>
+        </div>
+        <div class="col-4">
+          <div class="information-card"></div>
         </div>
       </div>
       <EscalaSemanalCard class="mb=2" :escalaSemanal="funcionario.people_times" />
       <Historico />
     </div>
-    <ModalForm />
+    <DefaultModalForm />
     <ModalFormEscalaSemanal />
     <ModalHistorico />
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
+import { humanizeDate } from "~/utils";
 
-
-import Header from "~/components/Header";
 import EscalaSemanalCard from "~/components/Funcionario/EscalaSemanalCard";
 
-import ModalForm from "~/components/Funcionario/ModalForm";
+import DefaultModalForm from "~/components/Funcionario/DefaultModalForm";
+
 import ModalFormEscalaSemanal from "~/components/Funcionario/ModalFormEscalaSemanal";
 import Historico from "~/components/Funcionario/Historico";
 
 export default {
-  layout: "default",
   components: {
-    Header,
     EscalaSemanalCard,
-    ModalForm,
+    DefaultModalForm,
     ModalFormEscalaSemanal,
     Historico
   },
-  data() {
-    return {
-      funcionario: {
-        cliente: {},
-        people_times: []
-      }
-    };
-  },
   created() {
+    console.log(humanizeDate);
     this.setEditMode(true);
-    this.fetchData();
+    this.setEndpoint("/funcionarios/");
+    this.get(this.$route.params.id);
+  },
+  beforeUpdate() {
+    this.setTitle(this.funcionario.name);
+  },
+  computed: {
+    funcionario() {
+      return this.$store.state.pages.data;
+    },
+    hasClienteData() {
+      if (this.funcionario.client)
+        return Boolean(Object.keys(this.funcionario.client).length);
+    }
   },
   methods: {
     fetchData() {
       this.$axios
-        .$get("http://www.mocky.io/v2/5e55be303000000f0028e15f")
+        .$get(`http://127.0.0.1:8000/api/funcionarios/${this.$route.params.id}`)
         .then(data => {
-          this.funcionario = data;
+          //this.funcionario = data;
+          this.setFuncionario(data);
+          console.log(data);
         })
         .catch(error => {
           //return {};
         });
     },
+    ...mapActions({
+      get: "pages/get"
+    }),
     ...mapMutations({
-      setEditMode: "pages/setEditMode",
-    })
+      setTitle: "pages/setTitle",
+      setEndpoint: "pages/setEndpoint",
+      setEditMode: "pages/setEditMode"
+    }),
+    humanizeDate
   }
 };
 </script>
