@@ -1,10 +1,5 @@
 <template>
   <div>
-    <Header>
-      <template v-slot:title>
-        <h2>Clientes</h2>
-      </template>
-    </Header>
     <div class="container mt-4">
       <div class="row">
         <div class="col">
@@ -12,33 +7,31 @@
         </div>
       </div>
     </div>
-    <ModalForm />
+    <DefaultModalForm />
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
 
-import Header from "~/components/Header";
-import ModalForm from "~/components/Cliente/ModalForm";
 import List from "~/components/Cliente/List";
+import DefaultModalForm from "~/components/Cliente/DefaultModalForm";
 
 export default {
-  layout: "list",
   components: {
-    Header,
-    ModalForm,
-    List
+    List,
+    DefaultModalForm
   },
   created() {
-    this.setEditMode(false);
-    this.resetCliente()
-
+    this.reset()
+    this.setTitle('Clientes');
+    this.setEndpoint('/clientes/');
   },
   methods: {
     ...mapMutations({
-      setEditMode: "pages/setEditMode",
-      resetCliente: "clientes/resetCliente"
+      setEndpoint: "pages/setEndpoint",
+      setTitle: "pages/setTitle",
+      reset: "pages/reset",
     })
   }
 };

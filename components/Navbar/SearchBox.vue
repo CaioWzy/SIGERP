@@ -1,5 +1,5 @@
 <template>
-  <div class="input-group input-group--custom">
+  <div v-if="!this.$store.state.pages.editMode" class="input-group input-group--custom">
     <input
       type="text"
       class="form-control form-control--custom"

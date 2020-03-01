@@ -2,7 +2,7 @@
   <div>
     <Header>
       <template v-slot:title>
-        <h2>{{ company_name }}</h2>
+        <h2>{{ cliente.fantasy_name }}</h2>
       </template>
     </Header>
     <div class="container mt-4">
@@ -13,67 +13,52 @@
               <li>
                 <font-awesome-icon :icon="['fas', 'briefcase']" />
                 <span>
-                  <b>{{ fantasy_name }}</b>
+                  <b>{{ cliente.company_name }}</b>
                 </span>
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'id-card']" />
-                <span>{{ cnpj }}</span>
+                <span>{{ cliente.cnpj }}</span>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <p> {{ id }} </p>
-    <ModalForm editMode />
+    <DefaultModalForm />
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
-import Header from "~/components/Header";
-import ModalForm from "~/components/Cliente/ModalForm";
+import DefaultModalForm from "~/components/Cliente/DefaultModalForm";
 
 export default {
-  layout: "default",
   components: {
-    Header,
-    ModalForm
+    DefaultModalForm
   },
   created() {
-    this.setEditMode(true)
-    this.fetchData();
+    this.setEditMode(true);
+    this.setEndpoint('/clientes/');
+    this.get(this.$route.params.id);
+  },
+  beforeUpdate() {
+    this.setTitle(this.cliente.fantasy_name)
   },
   computed: {
-    id() {
-      return this.$store.state.clientes.id;
-    },
-    fantasy_name() {
-      return this.$store.state.clientes.fantasy_name;
-    },
-    company_name() {
-      return this.$store.state.clientes.company_name;
-    },
-    cnpj() {
-      return this.$store.state.clientes.cnpj;
+    cliente() {
+      return this.$store.state.pages.data;
     }
   },
   methods: {
-    fetchData() {
-      this.$axios
-        .$get(`http://127.0.0.1:8000/api/clientes/${this.$route.params.id}`)
-        .then(data => {
-          this.setCliente(data);
-        })
-        .catch(error => {
-          this.$router.push("/404")
-        });
-    },
+    ...mapActions({
+      get: "pages/get"
+    }),
     ...mapMutations({
-      setCliente: "clientes/setCliente",
-      setEditMode: "pages/setEditMode",
+      setTitle: "pages/setTitle",
+      setEndpoint: "pages/setEndpoint",
+      setEditMode: "pages/setEditMode"
     })
   }
 };
