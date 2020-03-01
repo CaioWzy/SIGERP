@@ -3,7 +3,7 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col">
-          <List />
+          <InfiniteTable :endpoint="endpoint" :fields="fields" />
         </div>
       </div>
     </div>
@@ -14,24 +14,49 @@
 <script>
 import { mapMutations } from "vuex";
 
-import List from "~/components/Cliente/List";
+import InfiniteTable from "~/components/InfiniteTable";
 import DefaultModalForm from "~/components/Cliente/DefaultModalForm";
 
 export default {
   components: {
-    List,
+    InfiniteTable,
     DefaultModalForm
   },
   created() {
-    this.reset()
-    this.setTitle('Clientes');
-    this.setEndpoint('/clientes/');
+    this.reset();
+    this.setTitle("Clientes");
+    this.setEndpoint("/clientes/");
+  },
+  data() {
+    return {
+      fields: [
+        {
+          key: "fantasy_name",
+          sortable: "true",
+          label: "Nome Fantasia"
+        },
+        {
+          key: "company_name",
+          sortable: "true",
+          label: "Razão Social"
+        },
+        {
+          key: "cnpj",
+          label: "CNPJ"
+        }
+      ]
+    };
+  },
+  computed: {
+    endpoint() {
+      return this.$store.state.pages.endpoint;
+    }
   },
   methods: {
     ...mapMutations({
       setEndpoint: "pages/setEndpoint",
       setTitle: "pages/setTitle",
-      reset: "pages/reset",
+      reset: "pages/reset"
     })
   }
 };
