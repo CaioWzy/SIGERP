@@ -32,7 +32,7 @@ export default {
     },
     per_page: {
       type: Number,
-      default: 10
+      default: 25
     }
   },
   methods: {
