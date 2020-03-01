@@ -5,6 +5,7 @@
       label="company_name"
       placeholder="Pesquisar cliente"
       :options="options"
+      @input="onSelect"
       v-model="selected"
     ></v-select>
   </b-form-group>
@@ -23,10 +24,17 @@ export default {
   data() {
     return {
       options: [],
-      selected: ""
+      selected: { ...this.$store.state.pages.data.client }
     };
   },
+  computed: {},
   methods: {
+    /** Quando um Cliente (Empresa) é selecionado, dispara um evento
+     * que será capturado e armazenado nos dados do formulário.
+     */
+    onSelect(cliente) {
+      this.$bus.$emit("onClienteSelect", cliente);
+    },
     onSearch: _.debounce(function(search, loading) {
       loading = true;
       this.$axios

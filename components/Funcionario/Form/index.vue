@@ -51,7 +51,7 @@
     </div>
     <div class="form-row">
       <div class="col">
-        <ClientesVSelect ref="empresas" />
+        <ClientesVSelect />
       </div>
     </div>
     <div class="form-row">
@@ -103,6 +103,12 @@ export default {
   directives: { mask },
   components: {
     ClientesVSelect
+  },
+  /** Registra evento para capturar o cliente selecionado pelo VSelect */
+  created() {
+    this.$bus.$on("onClienteSelect", cliente => {
+      this.funcionario.client = {...cliente};
+    });
   },
   data() {
     return {
