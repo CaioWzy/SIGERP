@@ -13,7 +13,7 @@
               </li>
               <li>
                 <font-awesome-icon :icon="['fas', 'id-card']" />
-                <span>{{ cliente.cnpj }}</span>
+                <span>{{ maskedCnpj }}</span>
               </li>
             </ul>
           </div>
@@ -28,6 +28,7 @@
 import { mapMutations, mapActions } from "vuex";
 
 import DefaultModalForm from "~/components/Cliente/DefaultModalForm";
+import { maskIt } from "~/utils";
 
 export default {
   components: {
@@ -44,6 +45,10 @@ export default {
   computed: {
     cliente() {
       return this.$store.state.pages.data;
+    },
+    maskedCnpj() {
+      let cnpj = this.$store.state.pages.data.cnpj;
+      if (cnpj) return this.maskIt(cnpj, "##.###.###/####-##");
     }
   },
   methods: {
@@ -54,7 +59,8 @@ export default {
       setTitle: "pages/setTitle",
       setEndpoint: "pages/setEndpoint",
       setEditMode: "pages/setEditMode"
-    })
+    }),
+    maskIt
   }
 };
 </script>

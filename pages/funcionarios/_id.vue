@@ -9,7 +9,7 @@
                 <font-awesome-icon :icon="['fas', 'briefcase']" />
                 <span>
                   Trabalha na empresa
-                  <b>{{ funcionario.client.fantasy_name }}</b>
+                  <b>{{ funcionario.client.company_name }}</b>
                   desde
                   <b>{{ humanizeDate(funcionario.admission_date) }}</b>
                 </span>
@@ -33,7 +33,7 @@
                 <font-awesome-icon :icon="['fas', 'id-card']" />
                 <span>
                   CPF
-                  <b>{{ funcionario.cpf }}</b>
+                  <b>{{ maskedCpf }}</b>
                 </span>
               </li>
               <li>
@@ -50,11 +50,10 @@
           <div class="information-card"></div>
         </div>
       </div>
-      <EscalaSemanalCard class="mb=2" :escalaSemanal="funcionario.people_times" />
+      <EscalaSemanal class="mb=2" :escalaSemanal="funcionario.people_times" />
       <Historico />
     </div>
     <DefaultModalForm />
-    <ModalFormEscalaSemanal />
     <ModalHistorico />
   </div>
 </template>
@@ -62,23 +61,21 @@
 <script>
 import { mapMutations, mapActions } from "vuex";
 import { humanizeDate } from "~/utils";
+import { maskIt } from "~/utils";
 
-import EscalaSemanalCard from "~/components/Funcionario/EscalaSemanalCard";
 
 import DefaultModalForm from "~/components/Funcionario/DefaultModalForm";
 
-import ModalFormEscalaSemanal from "~/components/Funcionario/ModalFormEscalaSemanal";
+import EscalaSemanal from "~/components/Funcionario/EscalaSemanal";
 import Historico from "~/components/Funcionario/Historico";
 
 export default {
   components: {
-    EscalaSemanalCard,
+    EscalaSemanal,
     DefaultModalForm,
-    ModalFormEscalaSemanal,
     Historico
   },
   created() {
-    console.log(humanizeDate);
     this.setEditMode(true);
     this.setEndpoint("/funcionarios/");
     this.get(this.$route.params.id);
@@ -93,21 +90,13 @@ export default {
     hasClienteData() {
       if (this.funcionario.client)
         return Boolean(Object.keys(this.funcionario.client).length);
+    },
+    maskedCpf() {
+      let cpf = this.$store.state.pages.data.cpf;
+      if (cpf) return this.maskIt(cpf, "###.###.###.##");
     }
   },
   methods: {
-    fetchData() {
-      this.$axios
-        .$get(`http://127.0.0.1:8000/api/funcionarios/${this.$route.params.id}`)
-        .then(data => {
-          //this.funcionario = data;
-          this.setFuncionario(data);
-          console.log(data);
-        })
-        .catch(error => {
-          //return {};
-        });
-    },
     ...mapActions({
       get: "pages/get"
     }),
@@ -116,7 +105,8 @@ export default {
       setEndpoint: "pages/setEndpoint",
       setEditMode: "pages/setEditMode"
     }),
-    humanizeDate
+    humanizeDate,
+    maskIt
   }
 };
 </script>
