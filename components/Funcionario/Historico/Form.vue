@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modalHistorico" title="Histórico" size="lg" hide-footer>
+  <b-modal id="historicoModalForm" title="Histórico" size="lg" hide-footer>
     <div class="row">
       <div class="col">
         <div class="row">
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="col-1">
-            <button type="button" class="btn btn-control btn-custom btn-back float-right">
+            <button type="button" class="btn btn-control float-right">
               <font-awesome-icon :icon="['fas', 'search']" />
             </button>
           </div>
@@ -43,10 +43,10 @@ export default {
   data() {
     return {
       items: [
-        { age: 40, first_name: "Dickerson", last_name: "Macdonald" },
-        { age: 21, first_name: "Larsen", last_name: "Shaw" },
-        { age: 89, first_name: "Geneva", last_name: "Wilson" },
-        { age: 38, first_name: "Jami", last_name: "Carney" }
+        { Dia: "02/02/2019", Chegada: "10:00", Saída: "18:00" },
+        { Dia: "05/02/2019", Chegada: "12:00", Saída: "13:00" },
+        { Dia: "10/02/2019", Chegada: "10:00", Saída: "18:00" },
+        { Dia: "12/02/2019", Chegada: "-", Saída: "-" },
       ]
     };
   }

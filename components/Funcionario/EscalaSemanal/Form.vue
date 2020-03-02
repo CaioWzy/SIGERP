@@ -8,7 +8,7 @@
         <button
           @click="adicionarEscala"
           type="button"
-          class="btn btn-control btn-custom btn-back float-right"
+          class="btn btn-control btn-success float-right"
         >
           <font-awesome-icon :icon="['fas', 'plus']" />
         </button>
@@ -43,7 +43,7 @@
           <button
             @click="removerEscala(index)"
             type="button"
-            class="btn btn-control btn-custom btn-danger float-right"
+            class="btn btn-control btn-danger float-right"
           >
             <font-awesome-icon :icon="['fas', 'trash']" />
           </button>
