@@ -9,6 +9,7 @@ const getDefaultState = () => {
     },
     editMode: false,
     showGoBackButton: true,
+    isHomePage: false,
     endpoint: '',
     data: {}
   }
@@ -25,6 +26,9 @@ export const mutations = {
   },
   setEditMode(state, editMode) {
     state.editMode = editMode
+  },
+  setIsHomePage(state, isHomePage) {
+    state.isHomePage = isHomePage
   },
   setTitle(state, title) {
     state.header.title = title
@@ -44,6 +48,7 @@ export const actions = {
       .catch(error => {});
   },
   update({ commit, state }, form_data) {
+    console.log(form_data)
     this.$axios
       .$put(`${state.endpoint}${state.data.id}/`, form_data)
       .then(data => {

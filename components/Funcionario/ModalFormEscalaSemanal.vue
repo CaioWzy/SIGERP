@@ -1,19 +1,19 @@
 <template>
-  <ModalButton :editMode="this.$store.state.pages.editMode" entity="Cliente" modalFormId="modalFormDefault">
+  <ModalButton editMode entity="Escala Semanal" modalFormId="modalFormEscalaSemanal">
     <template v-slot:form>
-      <Form />
+      <EscalaSemanalForm />
     </template>
   </ModalButton>
 </template>
 
 <script>
 import ModalButton from "../ModalButton";
-import Form from "./Form";
+import EscalaSemanalForm from "./EscalaSemanalForm";
 
 export default {
   components: {
     ModalButton,
-    Form
+    EscalaSemanalForm
   }
 };
 </script>

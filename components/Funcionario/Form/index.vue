@@ -21,7 +21,7 @@
             v-model="funcionario.cpf"
             required
             placeholder="123.456.789-10"
-            maxlength="13"
+            maxlength="14"
             v-mask="'###.###.###-##'"
           ></b-form-input>
         </b-form-group>
@@ -118,8 +118,10 @@ export default {
   methods: {
     onSubmit(e) {
       e.preventDefault();
-      if (!this.funcionario.id) this.create(this.funcionario);
-      else this.update(this.funcionario);
+      let _data = {...this.funcionario} // Copia o objeto para evitar que a remoção da pontuação afete o formulário.
+      _data.cpf = _data.cpf.replace(/\D/g, ""); // Remove pontuação antes de enviar.
+      if (!_data) this.create(_data);
+      else this.update(_data);
     },
     onReset(e) {
       e.preventDefault();

@@ -3,32 +3,29 @@
     <div class="container pb-1">
       <div class="row">
         <div class="col">
-          <slot name="title"></slot>
+          <h2 v-if="this.$store.state.pages.header.title">{{ this.$store.state.pages.header.title }}</h2>
         </div>
         <div class="col">
-          <div class="controls float-right">
+          <div v-if="!this.$store.state.pages.isHomePage" class="controls float-right">
             <slot name="controls"></slot>
-            <b-button @click="$bvModal.show('modalFormDefault')" class="btn btn-custom btn-add">
-              <template v-if="!useEditIcon">
-                <font-awesome-icon :icon="['fas', 'plus']" />
-              </template>
-              <template v-else>
-                <font-awesome-icon :icon="['fas', 'edit']" />
-              </template>
-            </b-button>
+            <DefaultButton />
+            <DeleteButton />
           </div>
         </div>
       </div>
     </div>
+    <confirmDeleteDialog />
   </div>
 </template>
 
 <script>
+import DefaultButton from "./DefaultButton";
+import DeleteButton from "./DeleteButton";
+
 export default {
-  props: {
-    useEditIcon: {
-      type: Boolean
-    }
+  components: {
+    DefaultButton,
+    DeleteButton
   }
 };
 </script>

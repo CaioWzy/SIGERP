@@ -1,8 +1,131 @@
 .modal-header {
-    background: #2980b9;
-    color: white !important;
+  background: #2980b9;
+  color: white !important;
 }
 
-.close, .close:hover {
-    color: white;
+.close,
+.close:hover {
+  color: white;
+}
+
+
+
+
+html {
+  font-family: "Roboto";
+}
+
+.information {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.information__separator {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.information__matricula {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.information .fas {
+  width: 1.5rem;
+  padding-right: 16px;
+}
+
+.information ul {
+  padding: 0;
+}
+
+.card {
+  font-size: 0.75rem;
+}
+
+.card-header {
+  padding: 0.65rem 0;
+}
+
+.card-body {
+  padding: 0.65rem 0;
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+}
+
+th:not([scope="row"]) {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.table,
+th,
+td,
+tr {
+  border: 0 !important;
+  border-radius: 0.25rem;
+}
+
+/* Página de Listagem */
+
+.page-header {
+  background: #2980b9;
+  color: #fff;
+}
+
+/* Bootstrap buttons */
+
+.btn-custom {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  border: none;
+  opacity: 0.85;
+}
+
+.btn-custom:hover {
+  background: #fff !important;
+}
+
+.btn-add:hover {
+  color: #27ae60;
+}
+
+.btn-back:hover {
+  color: #2c3e50;
+}
+
+
+
+.information {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.information>li>svg {
+  width: 1rem !important;
+  margin-right: 0.75rem;
+  color: rgba(44, 62, 80, 1);
+}
+
+.information>li>span {
+  color: rgba(127, 140, 141, 1);
+}
+
+.information-card {
+  background: rgba(236, 240, 241, 1);
+  border-radius: 0.25rem;
+  padding: 1rem;
+  height: 100%;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity .3s ease;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }

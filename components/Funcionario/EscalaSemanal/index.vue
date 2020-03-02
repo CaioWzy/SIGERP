@@ -1,11 +1,15 @@
 <template>
-  <section>
+  <section class="mt-4">
     <div class="row mb-2">
       <div class="col">
         <h4>Escala Semanal</h4>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-control btn-custom btn-back float-right">
+        <button
+          @click="$bvModal.show('escalaSemanalModalForm')"
+          type="button"
+          class="btn btn-control btn-custom float-right"
+        >
           <font-awesome-icon :icon="['fas', 'edit']" />
         </button>
       </div>
@@ -26,17 +30,22 @@
         </div>
       </template>
     </div>
+    <ModalForm />
   </section>
 </template>
 
 <script>
+import ModalForm from "./ModalForm";
 export default {
+  components: {
+    ModalForm
+  },
   props: {
     escalaSemanal: Array
   },
   methods: {
     weekDayToString(weekday) {
-      console.log(weekday)
+      console.log(weekday);
       let weekdays = {
         0: "Domingo",
         1: "Segunda-Feira",
@@ -47,7 +56,7 @@ export default {
         6: "Sábado"
       };
       for (let key in weekdays) {
-        if (key == weekday) return weekdays[key]
+        if (key == weekday) return weekdays[key];
       }
     }
   }
