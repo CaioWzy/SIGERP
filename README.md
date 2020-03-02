@@ -1,7 +1,7 @@
 # SIGERP
 
 Esta é uma aplicação SPA feita com Nuxt.JS + Backend em Django.  
-A tela de batida de ponto de usuário ainda falta bem como também a implementação total do cadastro e pesquisa de escalas.  
+A tela de batida de ponto de usuário ainda falta bem como também a implementação total (CRUD) do cadastro e pesquisa de escalas.  
   
 O Nuxt.js é um framework baseado no Next.js para Vue, tornando o ecossistema o mais próximo do React, motivo pelo qual escolhi este framework além de ser o único com um pouco de experiência prévia. O Objetivo final era desenvolver totalmente a aplicação, mas obtive muita dificuldade com a manipulação de eventos e Vuex (equivalente ao Redux do React), infelizmente a documentação neste sentido é muito ruim, a comunidade é pequena, os erros não são claros e há pouquíssima informação a respeito nas comunidades, tornando o desenvolvimento desta aplicação muito arduoso. O React não foi escolhido antes por ser uma biblioteca mais complexa e não ter trabalho com ele diretamente.  
 
