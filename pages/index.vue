@@ -2,23 +2,18 @@
   <div class="container mt-4">
     <div class="row">
       <div class="col-2">
-        <nuxt-link to="/clientes">
-          <Card>
-            <template v-slot:content>
-              <h1>clientes</h1>
-              <font-awesome-icon :icon="['fas', 'briefcase']" size="5x" />
-            </template>
-          </Card>
-        </nuxt-link>
+        <Card to="/clientes/">
+          <template v-slot:content>
+            <Item v-slot:content faIcon="briefcase" title="Clientes" />
+          </template>
+        </Card>
       </div>
       <div class="col-2">
-        <nuxt-link to="/funcionarios">
-          <b-col>
-            <b-button xs>
-              <h3>Funcionarios</h3>
-            </b-button>
-          </b-col>
-        </nuxt-link>
+        <Card to="/funcionarios/">
+          <template v-slot:content>
+            <Item v-slot:content faIcon="user" title="Funcionários" />
+          </template>
+        </Card>
       </div>
     </div>
   </div>
@@ -27,17 +22,20 @@
 <script>
 import { mapMutations } from "vuex";
 import Card from "~/components/Dashboard/Card";
+import Item from "~/components/Dashboard/Card/Item";
 export default {
   created() {
     this.reset();
-    this.setTitle("Olá, Caio.");
+    this.setIsHomePage(true);
   },
   components: {
-    Card
+    Card,
+    Item
   },
   methods: mapMutations({
     reset: "pages/reset",
-    setTitle: "pages/setTitle"
+    setTitle: "pages/setTitle",
+    setIsHomePage: "pages/setIsHomePage"
   })
 };
 </script>
