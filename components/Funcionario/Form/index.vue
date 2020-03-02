@@ -92,7 +92,6 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 import { mapActions } from "vuex";
 
 import { mask } from "vue-the-mask";
@@ -107,7 +106,7 @@ export default {
   /** Registra evento para capturar o cliente selecionado pelo VSelect */
   created() {
     this.$bus.$on("onClienteSelect", cliente => {
-      this.funcionario.client = {...cliente};
+      this.funcionario.client = { ...cliente };
     });
   },
   data() {
@@ -133,9 +132,6 @@ export default {
     ...mapActions({
       create: "pages/create",
       update: "pages/update"
-    }),
-    ...mapMutations({
-      reset: "pages/reset"
     })
   }
 };
