@@ -66,6 +66,6 @@ export default {
     extend(config, ctx) {}
   },
   axios: {
-    baseURL: "http://localhost:8000/api"
+    baseURL: process.env.API_BASE_URL || ''
   }
 }
