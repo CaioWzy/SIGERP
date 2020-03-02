@@ -39,10 +39,6 @@ export default {
           key: "company_name",
           sortable: "true",
           label: "Razão Social"
-        },
-        {
-          key: "cnpj",
-          label: "CNPJ"
         }
       ]
     };

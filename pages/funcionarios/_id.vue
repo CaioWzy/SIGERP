@@ -2,7 +2,7 @@
   <div>
     <div class="container mt-4">
       <div class="row">
-        <div class="col">
+        <div class="col-8">
           <div class="information-card">
             <ul class="information">
               <li v-if="hasClienteData">
@@ -47,14 +47,12 @@
           </div>
         </div>
         <div class="col-4">
-          <div class="information-card"></div>
+          <Historico />
         </div>
       </div>
-      <EscalaSemanal class="mb=2" :escalaSemanal="funcionario.people_times" />
-      <Historico />
+      <EscalaSemanal :escalaSemanal="funcionario.people_times" />
     </div>
     <DefaultModalForm />
-    <ModalHistorico />
   </div>
 </template>
 
@@ -62,7 +60,6 @@
 import { mapMutations, mapActions } from "vuex";
 import { humanizeDate } from "~/utils";
 import { maskIt } from "~/utils";
-
 
 import DefaultModalForm from "~/components/Funcionario/DefaultModalForm";
 
@@ -72,8 +69,8 @@ import Historico from "~/components/Funcionario/Historico";
 export default {
   components: {
     EscalaSemanal,
-    DefaultModalForm,
-    Historico
+    Historico,
+    DefaultModalForm
   },
   created() {
     this.setEditMode(true);
@@ -119,7 +116,7 @@ export default {
 }
 .information > li > svg {
   width: 1rem !important;
-  margin-right: 0.75rem;
+  margin-right: 0.5rem;
   color: rgba(44, 62, 80, 1);
 }
 
