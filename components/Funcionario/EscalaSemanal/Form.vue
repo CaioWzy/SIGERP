@@ -8,7 +8,7 @@
         <button
           @click="adicionarEscala"
           type="button"
-          class="btn btn-control btn-success float-right"
+          class="btn btn-control text-success float-right"
         >
           <font-awesome-icon :icon="['fas', 'plus']" />
         </button>
@@ -43,7 +43,7 @@
           <button
             @click="removerEscala(index)"
             type="button"
-            class="btn btn-control btn-danger float-right"
+            class="btn btn-control text-danger float-right"
           >
             <font-awesome-icon :icon="['fas', 'trash']" />
           </button>
@@ -52,7 +52,7 @@
     </template>
     <div class="form-row">
       <div class="col">
-        <b-button type="submit" class="btn btn-primary float-right mt-4" variant="primary">
+        <b-button type="submit" class="btn btn-primary rounded-circle float-right mt-4" variant="primary">
           <font-awesome-icon :icon="['fas', 'save']" />
         </b-button>
       </div>

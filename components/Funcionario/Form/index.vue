@@ -83,7 +83,7 @@
     </div>
     <div class="form-row">
       <div class="col">
-        <b-button type="submit" class="btn float-right" variant="primary">
+        <b-button type="submit" class="btn rounded-circle float-right" variant="primary">
           <font-awesome-icon :icon="['fas', 'save']" />
         </b-button>
       </div>
@@ -95,6 +95,7 @@
 import { mapActions } from "vuex";
 
 import { mask } from "vue-the-mask";
+import { stripNonNumeric } from "~/utils";
 
 import ClientesVSelect from "./ClientesVSelect";
 
@@ -118,8 +119,8 @@ export default {
   methods: {
     onSubmit(e) {
       e.preventDefault();
-      let _data = {...this.funcionario} // Copia o objeto para evitar que a remoção da pontuação afete o formulário.
-      _data.cpf = _data.cpf.replace(/\D/g, ""); // Remove pontuação antes de enviar.
+      let _data = { ...this.funcionario }; // Copia o objeto para evitar que a remoção da pontuação afete o formulário.
+      _data.cpf = stripNonNumeric(_data.cpf);
       if (!_data) this.create(_data);
       else this.update(_data);
     },
@@ -134,7 +135,8 @@ export default {
     ...mapActions({
       create: "pages/create",
       update: "pages/update"
-    })
+    }),
+    stripNonNumeric
   }
 };
 </script>
